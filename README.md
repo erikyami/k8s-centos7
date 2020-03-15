@@ -12,7 +12,7 @@ Versão S.O: CentOS Linux release 7.7.1908 (Core)
 ## Versões dos componentes
 | componente | versão |
 | ----------| ---------|
-|docker-ce | 18.06.1 |
-|kubeadm | 1.15.7 |
-|kubectl | 1.15.7 | 
-|kubelet| 1.15.7|
+|docker-ce | 18.09.9 |
+|kubeadm | 1.15.11 |
+|kubectl | 1.15.11 | 
+|kubelet| 1.15.11|
