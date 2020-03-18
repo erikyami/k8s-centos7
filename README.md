@@ -29,13 +29,15 @@ vim /etc/hosts
 
 
 ### Configuração SELinux
+```
 setenforce 0
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+```
 
 ### Habilitar módulo br_netfilter
 modprobe br_netfilter
 
-cat <<EOF > /etc/sysctl.d/k8s.conf
+cat <<EOF \> /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
@@ -54,6 +56,7 @@ yum install -y yum-utils device-mapper-persistent-data lvm2
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
 ### Adicionar repositório kubernetes
+```
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -63,16 +66,21 @@ gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
+```
 
 
 ### Instalar os pacotes 
+```
 yum install -y kubelet kubeadm kubectl docker-ce
-
+```
 
 ## Configurações
 ### Confirações Docker
+```
 mkdir /etc/docker
+```
 
+```
 cat > /etc/docker/daemon.json <<EOF
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
@@ -86,32 +94,47 @@ cat > /etc/docker/daemon.json <<EOF
   ]
 }
 EOF
+```
 
+```
 mkdir -p /etc/systemd/system/docker.service.d
+```
 
-# Restart Docker
-systemctl daemon-reload
+Restart Docker
+
+```
+systemctl daemon-reload 
 systemctl enable docker  
 systemctl start docker  
+```
+
 
 
 ## Inicializando o cluster
+```
 kubeadm init --apiserver-advertise-address=192.168.58.30  --pod-network-cidr=10.244.0.0/16
-
+```
 
 ## Criando usuário comum para administrar o cluster
+```
 useradd kubeadmin
 passwd kubeadmin
 gpasswd -a kubeadmin docker
 gpasswd -a kubeadmin wheel
+```
 
-
+```
 su - kubeadmin
+```
 
+```
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
+```
 
 ## Realizar o deploy do plugin de Rede (calico)
+```
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+```
