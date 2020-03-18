@@ -21,11 +21,13 @@ Versão S.O: CentOS Linux release 7.7.1908 (Core)
 
 ## Preaparação do Ambiente / Instalação de Pacotes
 ### Configuração do arquivo /etc/hosts
+```
 vim /etc/hosts
 
 192.168.58.30 kube-master-01.example.com kube-master-01
 192.168.58.31 kube-worker-01.example.com kube-worker-01
 192.168.58.32 kube-worker-02.example.com kube-worker-02
+```
 
 
 ### Configuração SELinux
