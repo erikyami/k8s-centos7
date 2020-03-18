@@ -35,8 +35,10 @@ sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig
 ```
 
 ### Habilitar módulo br_netfilter
+```
 modprobe br_netfilter
-
+```
+```
 cat <<EOF \> /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
@@ -44,16 +46,24 @@ EOF
 
 sysctl --system
 
+```
 ### Desabilitar a partição de swap
+```
 swapoff -a
+```
 
+```
 vim /etc/fstab # Comentar a linha que monta a partição swap
+```
 
 ### Instalar Prerequisitos Docker
+```
 yum install -y yum-utils device-mapper-persistent-data lvm2
-
+```
 ### Adicionar repositório docker-ce
+```
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+```
 
 ### Adicionar repositório kubernetes
 ```
