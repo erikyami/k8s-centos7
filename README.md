@@ -150,3 +150,22 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 ```
+
+## Verificando os pods do namespace "kube-system"
+```
+[kubeadmin@kube-master-01 ~]$ kubectl get pods -n kube-system 
+NAME                                                 READY   STATUS    RESTARTS   AGE
+calico-kube-controllers-788d6b9876-wnsn6             1/1     Running   2          2d
+calico-node-7tx2q                                    0/1     Running   2          2d
+calico-node-mr888                                    1/1     Running   0          2d
+calico-node-pnl75                                    1/1     Running   0          47h
+coredns-6955765f44-cg2hq                             1/1     Running   2          2d
+coredns-6955765f44-qbmmb                             1/1     Running   2          2d
+etcd-kube-master-01.example.com                      1/1     Running   5          2d
+kube-apiserver-kube-master-01.example.com            1/1     Running   5          2d
+kube-controller-manager-kube-master-01.example.com   1/1     Running   7          2d
+kube-proxy-7sxbd                                     1/1     Running   3          2d
+kube-proxy-9zfs5                                     1/1     Running   0          47h
+kube-proxy-fffjv                                     1/1     Running   0          2d
+kube-scheduler-kube-master-01.example.com            1/1     Running   5          2d
+```
