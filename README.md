@@ -13,10 +13,10 @@ Versão S.O: CentOS Linux release 7.7.1908 (Core)
 ## Versões dos componentes
 | componente | versão |
 | ----------| ---------|
-|docker-ce | 18.09.9 |
-|kubeadm | 1.15.11 |
-|kubectl | 1.15.11 | 
-|kubelet| 1.15.11|
+|docker-ce | 19.3.8 |
+|kubeadm | 1.18.0 |
+|kubectl | 1.18.0 | 
+|kubelet| 1.18.0|
 
 
 ## Preaparação do Ambiente / Instalação de Pacotes
@@ -150,6 +150,13 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 ```
+
+## Configurando autocomplete
+```
+[kubeadmin@kube-master-01 ~]$ source <(kubectl completion bash)
+```
+
+
 
 ## Verificando os pods do namespace "kube-system"
 ```
