@@ -185,6 +185,7 @@ kube-scheduler-kube-master-01.example.com            1/1     Running   5        
 
 ### Inserindo os nodes do cluster:
 
+Inserir o comando abaixo nos nodes 01 e 02:
 
 ```
 kubeadm join 192.168.58.30:6443 --token 0pr8nk.cq9ruhct6k6do97s \
