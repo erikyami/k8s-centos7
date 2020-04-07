@@ -123,6 +123,8 @@ systemctl start docker
 
 
 ## Inicializando o cluster
+
+Somente na máquina kube-master-01 executar:
 ```
 kubeadm init --apiserver-advertise-address=192.168.58.30  --pod-network-cidr=10.244.0.0/16
 ```
