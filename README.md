@@ -5,9 +5,12 @@ A finalidade deste projeto é documentar a instalação de um cluster Kubernetes
 Versão S.O: CentOS Linux release 7.7.1908 (Core)
 
 ## Máquinas Utilizadas:
-* kube-master-01 | 192.168.58.30
-* kube-worker-01 | 192.168.58.31
-* kube-worker-02 | 192.168.58.32
+
+|    Máquina     |      IP       |
+| :------------: | :-----------: |
+| kube-master-01 | 192.168.58.30 |
+| kube-worker-01 | 192.168.58.31 |
+| kube-worker-02 | 192.168.58.32 |
 
 
 ## Versões dos componentes
