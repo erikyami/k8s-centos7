@@ -11,12 +11,12 @@ Versão S.O: CentOS Linux release 7.7.1908 (Core)
 
 
 ## Versões dos componentes
-| componente | versão |
-| ----------| ---------|
-|docker-ce | 19.3.8 |
-|kubeadm | 1.18.0 |
-|kubectl | 1.18.0 | 
-|kubelet| 1.18.0|
+| componente | versão   |
+| :---------:| :------: |
+| docker-ce  | 19.3.8   |
+| kubeadm    | 1.18.0   |
+| kubectl    | 1.18.0   | 
+| kubelet    | 1.18.0   |
 
 
 ## Preaparação do Ambiente / Instalação de Pacotes
@@ -127,7 +127,10 @@ systemctl start docker
 kubeadm init --apiserver-advertise-address=192.168.58.30  --pod-network-cidr=10.244.0.0/16
 ```
 
-## Criando usuário comum para administrar o cluster
+Ao terminar de inicializar o cluster, irá aparecer algumas instruções e o comando para para a inclusão dos nodes no cluster.
+
+
+### Criando usuário comum para administrar o cluster
 ```
 useradd kubeadmin
 passwd kubeadmin
@@ -146,19 +149,19 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ```
 
-## Realizar o deploy do plugin de Rede (calico)
+### Realizar o deploy do plugin de Rede (calico)
 ```
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 ```
 
-## Configurando autocomplete
+### Configurando autocomplete
 ```
 [kubeadmin@kube-master-01 ~]$ source <(kubectl completion bash)
 ```
 
 
 
-## Verificando os pods do namespace "kube-system"
+### Verificando os pods do namespace "kube-system"
 ```
 [kubeadmin@kube-master-01 ~]$ kubectl get pods -n kube-system 
 NAME                                                 READY   STATUS    RESTARTS   AGE
@@ -175,4 +178,23 @@ kube-proxy-7sxbd                                     1/1     Running   3        
 kube-proxy-9zfs5                                     1/1     Running   0          47h
 kube-proxy-fffjv                                     1/1     Running   0          2d
 kube-scheduler-kube-master-01.example.com            1/1     Running   5          2d
+```
+
+
+### Inserindo os nodes do cluster:
+
+
+```
+kubeadm join 192.168.58.30:6443 --token 0pr8nk.cq9ruhct6k6do97s \
+    --discovery-token-ca-cert-hash sha256:29c11968e6c3286044f201d3a46860a5259e28906fd6e795e888ac68b41c6110 
+```
+
+
+### Listando os nodes no cluster
+```
+[kubeadmin@master ~]$ kubectl get nodes -o wide
+NAME                       STATUS   ROLES    AGE    VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE                KERNEL-VERSION                CONTAINER-RUNTIME
+kube-master-01.example.com  Ready    master   6d3h   v1.18.0   192.168.58.30   <none>        CentOS Linux 7 (Core)   3.10.0-1062.18.1.el7.x86_64   docker://19.3.8
+kube-worker-01.example.com  Ready    <none>   6d3h   v1.18.0   192.168.58.31   <none>        CentOS Linux 7 (Core)   3.10.0-1062.18.1.el7.x86_64   docker://19.3.8
+kube-worker-01.example.com  Ready    <none>   6d3h   v1.18.0   192.168.58.32   <none>        CentOS Linux 7 (Core)   3.10.0-1062.18.1.el7.x86_64   docker://19.3.8
 ```
