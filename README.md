@@ -63,7 +63,7 @@ vim /etc/fstab # Comentar a linha que monta a partição swap
 
 ### Instalar Prerequisitos Docker
 ```
-yum install -y yum-utils device-mapper-persistent-data lvm2
+yum install -y yum-utils device-mapper-persistent-data lvm2 yum-plugin-versionlock
 ```
 ### Adicionar repositório docker-ce
 ```
@@ -85,8 +85,17 @@ EOF
 
 
 ### Instalar os pacotes 
+
+Instalando os pacotes necessários:
+
 ```
 yum install -y kubelet kubeadm kubectl docker-ce
+```
+
+Realizando um "lock" da versão dos componentes para manter a versão instalada:
+
+```
+yum versionlock kubelet kubeadm kubectl docker-ce
 ```
 
 ## Configurações
