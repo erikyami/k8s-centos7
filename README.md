@@ -219,12 +219,16 @@ kube-worker-01.example.com  Ready    <none>   6d3h   v1.18.0   192.168.58.32   <
  - Comandos úteis:
    `kubectl explain`
 
+```
 kubectl explain pod
 kubectl explain pod.spec
 kubectl explain pod.spec.containers
+```
 
 
 "help"
+```
 kubectl -h | less
 kubectl get -h | less
 kubectl describe -h | less
+```
