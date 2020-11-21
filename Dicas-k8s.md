@@ -37,3 +37,8 @@ kubectl apply -f pod.yaml
  - Listar os objetos disponíveis para determinado API Group
  ```
  kubectl api-resources --api-group=apps
+
+  - Listar as versões API disponíveis na API Server
+  ```
+  kubectl api-versions | sort | less
+  ```
